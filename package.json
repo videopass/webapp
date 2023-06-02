@@ -1,0 +1,76 @@
+{
+  "name": "videopass-webapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently 'npm run dev' 'npm run firestore' 'npm run seed'",
+    "dev": "NODE_ENV=development react-scripts start",
+    "build": "PUBLIC_URL=/ react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "kill-emulator": "kill-port 8080 && kill-port 5001  && kill-port 5000",
+    "seed": "tsx watch ./dbseed.ts",
+    "production": "env-cmd -f .env npm run build",
+    "deploy": "npm run production && firebase deploy -P default --only hosting:videopass-io",
+    "firestore": "npm run kill-emulator && firebase emulators:start --inspect-functions --only firestore",
+    "update": "ncu -u @videopass*/* && npm install"
+  },
+  "dependencies": {
+    "@date-fns/utc": "^1.0.0",
+    "@videopass/ctms-core": "^0.0.2",
+    "@videopass/ctms-model": "^0.0.7",
+    "@videopass/firebase": "^0.0.12",
+    "@videopass/model": "^0.0.44",
+    "@videopass/services": "^0.0.31",
+    "big.js": "^6.2.1",
+    "date-fns": "^2.29.3",
+    "date-fns-tz": "^2.0.0",
+    "delay": "^6.0.0",
+    "firebase": "^9.19.1",
+    "grommet": "^2.29.0",
+    "grommet-icons": "^4.8.0",
+    "npm-check-updates": "^16.10.12",
+    "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-qr-code": "^2.0.11",
+    "react-router-dom": "^6.6.2",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.1.6",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.11",
+    "@types/react": "^18.0.26",
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-dom": "^18.0.10",
+    "@types/styled-components": "^5.1.26",
+    "concurrently": "^8.0.1",
+    "env-cmd": "^10.1.0",
+    "firebase-admin": "^11.5.0",
+    "kill-port": "^2.0.1",
+    "react-scripts": "5.0.1",
+    "tsx": "^3.12.3",
+    "ttab": "^0.8.0",
+    "typescript": "^4.9.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
